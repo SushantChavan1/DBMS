@@ -1,0 +1,92 @@
+NOTE::some symbols are used in this repo
+
+sr.no   symbol    meaning
+1.      /**/      Heading 
+2.      ****      super Heading
+3.      *..*      Contaning description
+4.      <>        More Information about content
+
+
+
+
+
+
+/*This command for creating user*/
+create user User_nmae identified by password;
+
+connect;
+User_nmae;
+password
+
+/*The command for table creation*/
+ create table table_name(coloum_name type constraint);
+
+/*The command for inserting valuse*/
+insert into emp values();
+
+/*Command for to display the table*/
+select * from table_name;
+
+/*Command for to show the current user*/
+show user;
+
+/*Command for to show linesize*/
+show linesize;
+
+/*Command for to show pagesize*/
+show pagesize;
+
+/*Command for to set a linesize*/
+set linesize size;
+by default size is=80
+
+/*Command for to set a pagesize*/
+set pagesize size;
+by default size is=14
+
+/*Command for to describe the table structure*/
+describe emp;
+
+*****where clause******
+
+/*Command for applying 'where' clause on table to retrive a specific record*/
+ select * from table_name where coloum_name operator vlaue;
+
+ /*Command for retrive an record from coloum by using conditions and operator*/
+ select coloum_name from table_name where coloum_name condition;
+
+
+**********between clause*********
+/*Command for retrive an record in between */
+select * from table_name where coloum_name between vlaue1 and vlaue2;
+
+/*where clause with like operator*/
+*It can match the pattern in string suppose my name is 'suhant' then 
+ I want to retrive an the names containing the character 's' 
+  then the  like clause is uesd*
+
+select * from table_name where coloum_name like 'character%';
+
+<The '%'(wildcard) sidnifies the later character here which can
+be of any length>
+
+/*Where clause with 'in' operator*/
+select * from table_name where coloum_name in (values,vlaues);
+
+/*Command to drop the table*/
+drop table table_name;
+
+/*Command to grant insert,select,update,alter to another user*/
+ grant insert on user_1.user_1_table_name to user_2;
+
+
+/*Command to connect grant*/
+grant connect to u3;
+
+
+/*Command to copy the table_1 data to table_2*/
+ insert into new_table select * from old_table;
+
+
+ /*Command to delete an record of another table*/
+ delete sushant.stu where rollno=1;

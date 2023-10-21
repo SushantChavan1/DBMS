@@ -1,0 +1,672 @@
+_________________________________________________________________________________________assignment -1________________
+
+que-1)
+
+Enter user-name: system
+Enter password:
+Connected
+ create user a11 identified by a11;
+
+ create user a12 identified by a12;
+
+ create user a13 identified by a13;
+
+ create user a14 identified by a14;
+
+ connect a11/11;
+
+ grant dba to a11;
+
+grant connect to a12;
+
+grant insert on a11.student to a12;
+
+grant connect to a13;
+
+grant select on a11.student to a13;
+
+
+create table student(roll_no number primary key ,name varchar2(20),address varchar2(20),DOb date,mark number,MOB number);
+
+ connect a12/a12;
+
+ insert into a11.student values(1,'sachin','sangola','15-sep-2004',87,1234567890);
+
+ insert into a11.student values(2,'ramesh','pune','12-sep-2004',88,9087654321);
+
+SQL> insert into a11.student values(3,'raju','mumbai','12-oct-2003',89,1122334455);
+
+SQL> insert into a11.student values(4,'sanjay','latur','01-nov-2003',74,9988776666);
+
+SQL> insert into a11.student values(5,'ganesh','sangola','03-dec-2001',78,9890768909);
+
+SQL> insert into a11.student values(6,'vinod','solapur','05-dec-2002',79,9845673454);
+
+SQL> insert into a11.student values(7,'rajesh','sangola','05-sep-2020',80,9845567890);
+
+SQL> insert into a11.student values(8,'soma','sangali','07-aug-2001',83,9345678902);
+
+SQL> insert into a11.student values(9,'rahul','miraj','08-dec-2000',85,8965473823);
+
+SQL> insert into a11.student values(10,'rohit','pune','09-june-2003',56,895634connect9087);
+
+SQL> connect a13/a13;
+
+SQL> select * from a11.student;
+
+   ROLL_NO NAME                 ADDRESS              DOB             MARK        MOB
+---------- -------------------- -------------------- --------- ---------- ----------
+         1 sachin               sangola              15-SEP-04         87 1234567890
+         2 ramesh               pune                 12-SEP-04         88 9087654321
+         3 raju                 mumbai               12-OCT-03         89 1122334455
+         4 sanjay               latur                01-NOV-03         74 9988776666
+         5 ganesh               sangola              03-DEC-01         78 9890768909
+         6 vinod                solapur              05-DEC-02         79 9845673454
+         7 rajesh               sangola              05-SEP-20         80 9845567890
+         8 soma                 sangali              07-AUG-01         83 9345678902
+         9 rahul                miraj                08-DEC-00         85 8965473823
+        10 rohit                pune                 09-JUN-03         56 8956349087
+
+SQL> grant dba to a14;    
+
+connect a14/a14;
+
+SQL> create table student_copy as select * from a11.student;
+
+SQL> select * from student_copy;
+
+que-2)
+
+SQL> connect system/password;
+Connected.
+SQL> create table dept(dept_id number primary key ,name varchar2(20),location varchar2(20));
+
+Table created.
+
+SQL> insert into dept values(1,'research','pune');
+
+SQL> insert into dept values(2,'sales','solapur');
+
+SQL> insert into dept values(3,'accounts','delhi');
+
+SQL> insert into dept values(4,'sales','mumbai');
+
+SQL> insert into dept values(5,'lab','nashik');s
+
+SQL> select * from dept;
+
+   DEPT_ID NAME                 LOCATION
+---------- -------------------- --------------------
+         1 research             pune
+         2 sales                solapur
+         3 accounts             delhi
+         4 sales                mumbai
+         5 lab                  nashik
+
+
+
+SQL> create table emp(e_no number primary key, name varchar2(20),dept_id number,salary number,address varchar2(20));
+
+Table created.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ E_NO                                      NOT NULL NUMBER
+ NAME                                               VARCHAR2(20)
+ DEPT_ID                                            NUMBER
+ SALARY                                             NUMBER
+ ADDRESS                                            VARCHAR2(20)
+
+SQL> insert into emp values(1,'ajay',1001,6000,'sangola');
+
+SQL> insert into emp values(2,'vijay',1001,9000,'sangola');
+
+SQL> insert into emp values(3,'sanjay',1002,8000,'solapur');
+
+SQL> insert into emp values(4,'sujay',1002,10000,'pune');
+
+SQL> insert into emp values(5,'raju',1003,7000,'kolhapuur');
+
+SQL> insert into emp values(6,'rajesh',1003,9000,'medshingi');
+
+SQL> insert into emp values(7,'raj',1004,8000,'mangalwedha');
+
+SQL> insert into emp values(8,'rahul',1004,9000,'mumbai');
+
+SQL> insert into emp values(9,'sachin',1005,8000,'nanded');
+
+SQL> insert into emp values(10,'salman',1005,9000,'nashik');
+
+SQL> select * from emp;
+
+      E_NO NAME                    DEPT_ID     SALARY ADDRESS
+---------- -------------------- ---------- ---------- --------------------
+         1 ajay                       1001       6000 sangola
+         2 vijay                      1001       9000 sangola
+         3 sanjay                     1002       8000 solapur
+         4 sujay                      1002      10000 pune
+         5 raju                       1003       7000 kolhapuur
+         6 rajesh                     1003       9000 medshingi
+         7 raj                        1004       8000 mangalwedha
+         8 rahul                      1004       9000 mumbai
+         9 sachin                     1005       8000 nanded
+        10 salman                     1005       9000 nashik
+
+
+
+
+Que 3)
+
+SQL> create table item(item_id number primary key,name varchar2(20),price number,ex_date date check('ex_date'>'1-dec-2026'));
+
+SQL> insert into item values(1,'suger',40,'1-jan-2025');
+
+SQL> insert into item values(2,'shampoo',400,'12-mar-2025');
+
+SQL> insert into item values(3,'face_wash',190,'2-aug-2026');
+
+SQL> insert into item values(4,'colgate',60,'2-sep-2024');
+
+SQL> insert into item values(5,'tablet',100,'23-sep-2026');
+
+SQL> select * from item;
+
+   ITEM_ID NAME                      PRICE EX_DATE
+---------- -------------------- ---------- ---------
+         1 suger                        40 01-JAN-25
+         2 shampoo                     400 12-MAR-25
+         3 face_wash                   190 02-AUG-26
+         4 colgate                      60 02-SEP-24
+         5 tablet                      100 23-SEP-26
+
+*****bill_master*****
+
+
+create table bill_master(b_no numebr primary key,cust_name varchar2(20), b_date date);
+
+SQL> insert into bill_master values(1201,'suraj','11-aug-2023');
+
+SQL> insert into bill_master values(1202,'raj','12-aug-2023');
+
+SQL> insert into bill_master values(1203,'raju','13-aug-2023');
+
+SQL> insert into bill_master values(1204,'rajesh','14-aug-2023');
+
+SQL> insert into bill_master values(1205,'ram','15-aug-2023');
+
+SQL> select * from bill_master;
+
+      B_NO CUST_NAME            B_DATE
+---------- -------------------- ---------
+      1201 suraj                11-AUG-23
+      1202 raj                  12-AUG-23
+      1203 raju                 13-AUG-23
+      1204 rajesh               14-AUG-23
+      1205 ram                  15-AUG-23
+
+
+****bill_detail****
+
+ create table bill_detail(b_no number references bill_master(b_no),item_id number references item(item_id),QTY number check(QTY>5),primary key(item_id,QTY));
+
+Table created.
+
+SQL> insert into bill_detail(b_no, item_id,qty) values (1202,1,10);
+
+SQL> insert into bill_detail(b_no, item_id,qty) values (1201,2,14);
+
+SQL> insert into bill_detail(b_no, item_id,qty) values (1203,3,16)
+
+SQL> insert into bill_detail(b_no, item_id,qty) values (1204,4,17);
+
+SQL> insert into bill_detail(b_no, item_id,qty) values (1205,5,7);
+
+SQL> select * from bill_detail;
+
+      B_NO    ITEM_ID        QTY
+---------- ---------- ----------
+      1202          1         10
+      1201          2         14
+      1203          3         16
+      1204          4         17
+      1205          5          7
+
+
+____________________________________________assignment no :02_______________________________________________________________
+
+
+
+Assignment No 2 Q2.
+
+SQL> select * from book;
+
+        ID TITLE                AUTHOR               PUBLISHER            CATEGORY                   YEAR      PRICE
+---------- -------------------- -------------------- -------------------- -------------------- ---------- ----------
+      1001 The Knowledge        Pressman             Navneet              communication              1991        250
+      1002 Software testing     Sachin               Navneet              computer                   1992        200
+      1003 Software testing     Sachin               Vidyabharti          computer                   1992        300
+      1004 Probality            Mahesh               Shantiniketan        Maths                      1993        150
+
+
+
+SQL> select * from distributer;
+
+       DID NAME                 CITY                   DISCOUNT
+---------- -------------------- -------------------- ----------
+       101 Sushant              Lohagoan                     20
+       102 Sush                 goa                          24
+       103 Vaibhav              Puna                         28
+       104 Vaibhu               Nashik                       18
+
+
+SQL> select * from order1;
+
+  ORDER_NO TITLE                       DID        QTY
+---------- -------------------- ---------- ----------
+         1 Software testing            101         30
+         2 Probablity                  103         50
+         3 The Knowledge               104         40
+         4 The Knowledge               102         10
+
+
+
+a.SQL> select title,category from book;
+
+TITLE                CATEGORY
+-------------------- --------------------
+The Knowledge        communication
+Software testing     computer
+Software testing     computer
+Probality            Maths
+
+
+b.SQL> select year,count(title) from book group by year;
+
+      YEAR COUNT(TITLE)
+---------- ------------
+      1993            1
+      1991            1
+      1992            2
+
+c.SQL> select id,author from book;
+
+        ID AUTHOR
+---------- --------------------
+      1001 Pressman
+      1002 Sachin
+      1003 Sachin
+      1004 Mahesh
+
+d.SQL> select title from book where year in (1991,1992);
+
+TITLE
+--------------------
+The Knowledge
+Software testing
+Software testing
+
+e.SQL> select title from book where year between (1991) and (1993);
+
+TITLE
+--------------------
+The Knowledge
+Software testing
+Software testing
+Probality
+
+f.SQL> select title,price from book where (price)>200;
+
+TITLE                     PRICE
+-------------------- ----------
+The Knowledge               250
+Software testing            300
+
+g.SQL> select category,count(title) from book group by category;
+
+CATEGORY             COUNT(TITLE)
+-------------------- ------------
+Maths                           1
+computer                        2
+communication                   1
+
+h.SQL> select title,price from book where price >= (select avg(price) from book);
+
+TITLE                     PRICE
+-------------------- ----------
+The Knowledge               250
+Software testing            300
+
+l.SQL> select id,title from book where author='Pressman';
+
+        ID TITLE
+---------- --------------------
+      1001 The Knowledge
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+________________________________________________________Assignment NO-03______________________________________________________
+
+
+
+
+
+-- Create the 'branch' table
+SQL> CREATE TABLE branch (
+    Bno NUMBER(4) PRIMARY KEY,
+    bname VARCHAR2(20) NOT NULL,
+    City VARCHAR2(15) NOT NULL
+);
+
+-- Create the 'customer' table
+SQL> CREATE TABLE customer (
+    Cust_no NUMBER(6) PRIMARY KEY,
+    Cust_name VARCHAR2(20) NOT NULL,
+    City VARCHAR2(15) NOT NULL
+);
+
+SQL>
+CREATE TABLE deposit (
+    Acc_no VARCHAR2(5) PRIMARY KEY CHECK (Acc_no LIKE 'D%'),
+    Cust_no NUMBER(6),
+    Bno NUMBER(4),
+    Amount NUMBER(9, 2) NOT NULL DEFAULT 500.00,
+    Adate DATE NOT NULL,
+    FOREIGN KEY (Cust_no) REFERENCES customer (Cust_no),
+    FOREIGN KEY (Bno) REFERENCES branch (Bno)
+);
+
+SQL>
+CREATE TABLE borrow (
+    Loan_no NUMBER(5) PRIMARY KEY,
+    Cust_no NUMBER(6),
+    Bno NUMBER(4),
+    Amount NUMBER(9, 2) NOT NULL DEFAULT 500.00,
+    FOREIGN KEY (Cust_no) REFERENCES customer (Cust_no),
+    FOREIGN KEY (Bno) REFERENCES branch (Bno)
+);
+
+-- Insert data into the tables
+-- Note: You'll need to insert at least 10 records for each table.
+-- Insert records into 'branch', 'customer', 'deposit', and 'borrow' tables.
+
+-- 1. Insert minimum 10 records.
+
+2)--SQL> Describe the tables
+DESCRIBE branch;
+DESCRIBE customer;
+DESCRIBE deposit;
+DESCRIBE borrow;
+
+3)--SQL>
+SELECT Acc_no, Amount FROM deposit;
+
+4)-- Give names of borrowers.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN borrow b ON c.Cust_no = b.Cust_no;
+
+5)-- Give names of customers living in city NAGPUR.
+SQL> SELECT Cust_name
+FROM customer
+WHERE City = 'NAGPUR';
+
+6)-- Give names of depositors having amount greater than 4000.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN deposit d ON c.Cust_no = d.Cust_no
+WHERE d.Amount > 4000;
+
+7)-- Give name of customer having living city BOMBAY and branch city DELHI.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN branch b ON c.City = 'BOMBAY' AND b.City = 'DELHI';
+
+8)-- Give names of customer having the same living city as their branch city.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN branch b ON c.City = b.City;
+
+9)-- Give name of customers who are borrowers as well as depositors and having living city NAGPUR.
+SQL> SELECT c.Cust_name
+FROM customer c
+WHERE c.Cust_no IN (SELECT Cust_no FROM borrow)
+AND c.Cust_no IN (SELECT Cust_no FROM deposit)
+AND c.City = 'NAGPUR';
+
+10)-- Give name of customers who are depositors and have the same branch city as that of sunil.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN deposit d ON c.Cust_no = d.Cust_no
+JOIN customer sunil ON sunil.Cust_name = 'Sunil' AND c.City = sunil.City;
+
+11)-- Give names of depositors having the same living city as that of shivani and having deposit amount greater than 200.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN deposit d ON c.Cust_no = d.Cust_no
+JOIN customer shivani ON shivani.Cust_name = 'Shivani' AND c.City = shivani.City
+WHERE d.Amount > 200;
+
+12)-- Give names of borrowers having deposit amount greater than 1000 and loan amount greater than 2000.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN borrow b ON c.Cust_no = b.Cust_no
+JOIN deposit d ON c.Cust_no = d.Cust_no
+WHERE d.Amount > 1000
+AND b.Amount > 2000;
+
+13)-- Give names of borrowers having loan amount greater than the loan amount of anil.
+SQL> SELECT b.Cust_name
+FROM borrow b
+WHERE b.Amount > (SELECT Amount FROM borrow WHERE Cust_name = 'Anil');
+
+14)-- Give loanno and loan amount of borrowers having the same branch as that of depositor sunil.
+SQL> SELECT b.Loan_no, b.Amount
+FROM borrow b
+JOIN deposit d ON b.Bno = d.Bno
+JOIN customer sunil ON sunil.Cust_name = 'Sunil' AND sunil.City = b.City;
+
+15)-- Give loanno, loan amount, account no, and deposit amount of customers living in city NAGPUR.
+ SQL> SELECT b.Loan_no, b.Amount, d.Acc_no, d.Amount
+FROM customer c
+LEFT JOIN borrow b ON c.Cust_no = b.Cust_no
+LEFT JOIN deposit d ON c.Cust_no = d.Cust_no
+WHERE c.City = 'NAGPUR';
+
+16)-- Give loanno, loan amount, account no, and deposit amount of customers having deposit branch located in delhi.
+SQL> SELECT b.Loan_no, b.Amount, d.Acc_no, d.Amount
+FROM customer c
+LEFT JOIN borrow b ON c.Cust_no = b.Cust_no
+LEFT JOIN deposit d ON c.Cust_no = d.Cust_no
+JOIN branch br ON c.City = br.City
+WHERE br.City = 'DELHI';
+
+17)-- Give city of customer having the same branch city as that of pramod.
+SQL> SELECT c.City
+FROM customer c
+JOIN branch b ON c.City = b.City
+JOIN customer pramod ON pramod.Cust_name = 'Pramod';
+
+18)-- Give branch city and living city of SANDIP.
+SQL> SELECT b.City, c.City
+FROM customer c
+JOIN branch b ON c.Cust_name = 'Sandip';
+
+19)-- List total Loan.
+SQL> SELECT SUM(Amount) AS Total_Loan
+FROM borrow;
+
+20)-- List total loan taken from 'andheri' branch.
+SQL> SELECT SUM(b.Amount) AS Total_Loan
+FROM borrow b
+JOIN branch br ON b.Bno = br.Bno
+WHERE br.City = 'ANDHERI';
+
+21)- List total deposit of customer having account date later than 1-jan-09.
+SQL> SELECT SUM(d.Amount) AS Total_Deposit
+FROM deposit d
+WHERE d.Adate > TO_DATE('2009-01-01', 'YYYY-MM-DD');
+
+22)-- List maximum deposit of customers living in city NAGPUR.
+SQL> SELECT MAX(d.Amount) AS Max_Deposit
+FROM deposit d
+JOIN customer c ON d.Cust_no = c.Cust_no
+WHERE c.City = 'NAGPUR';
+
+23)-- Give branch name and branch wise deposit.
+SQL> SELECT b.bname, SUM(d.Amount) AS Branch_Deposit
+FROM branch b
+LEFT JOIN deposit d ON b.Bno = d.Bno
+GROUP BY b.bname;
+
+24)-- Give city name and city wise deposit.
+SQL> SELECT c.City, SUM(d.Amount) AS City_Deposit
+FROM customer c
+LEFT JOIN deposit d ON c.Cust_no = d.Cust_no
+GROUP BY c.City;
+
+25)-- Give branch wise deposit of customer after account date 1-jan-09.
+SQL> SELECT b.bname, SUM(d.Amount) AS Branch_Deposit
+FROM branch b
+JOIN deposit d ON b.Bno = d.Bno
+WHERE d.Adate > TO_DATE('2009-01-01', 'YYYY-MM-DD')
+GROUP BY b.bname;
+
+26)-- List all the customers who are depositors but not borrowers.
+SQL> SELECT c.Cust_name
+FROM customer c
+LEFT JOIN deposit d ON c.Cust_no = d.Cust_no
+LEFT JOIN borrow b ON c.Cust_no = b.Cust_no
+WHERE b.Cust_no IS NULL;
+
+27)-- List all the customers, along with their amount, who are either borrowers or depositors and living in city NAGPUR.
+SQL> SELECT c.Cust_name, COALESCE(SUM(b.Amount), 0) AS Borrowed_Amount, COALESCE(SUM(d.Amount), 0) AS Deposited_Amount
+FROM customer c
+LEFT JOIN borrow b ON c.Cust_no = b.Cust_no
+LEFT JOIN deposit d ON c.Cust_no = d.Cust_no
+WHERE c.City = 'NAGPUR'
+GROUP BY c.Cust_name;
+
+28)-- List all the depositors living in city NAGPUR.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN deposit d ON c.Cust_no = d.Cust_no
+WHERE c.City = 'NAGPUR';
+
+29)-- List the customer having deposit greater than 1000 and loan less than 10000.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN deposit d ON c.Cust_no = d.Cust_no
+LEFT JOIN borrow b ON c.Cust_no = b.Cust_no
+WHERE d.Amount > 1000 AND (b.Amount IS NULL OR b.Amount < 10000);
+
+30)-- List the depositors having amount less than 8000 and living in the same city as Ms. Shivani.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN deposit d ON c.Cust_no = d.Cust_no
+JOIN customer shivani ON shivani.Cust_name = 'Shivani' AND c.City = shivani.City
+WHERE d.Amount < 8000;
+
+31)-- List the cities which are either branch city of ANIL or living city of SUNIL.
+SQL> SELECT City
+FROM (
+    SELECT City FROM branch
+    UNION
+    SELECT City FROM customer WHERE Cust_name = 'Sunil'
+    UNION
+    SELECT b.City FROM branch b
+    JOIN customer c ON c.Cust_name = 'Anil' AND c.City = b.City
+);
+
+32)-- List the customers who are borrowers or depositors and having living city MUMBAI and branch same as that of SANDIP.
+SQL> SELECT c.Cust_name
+FROM customer c
+LEFT JOIN borrow b ON c.Cust_no = b.Cust_no
+LEFT JOIN deposit d ON c.Cust_no = d.Cust_no
+JOIN branch br ON c.City = 'MUMBAI' AND c.City = br.City
+JOIN customer sandip ON sandip.Cust_name = 'Sandip' AND br.Bno = sandip.Bno;
+
+33)-- List total deposit of customers living in the city where SUNIL is living.
+SQL> SELECT SUM(d.Amount) AS Total_Deposit
+FROM customer c
+LEFT JOIN deposit d ON c.Cust_no = d.Cust_no
+JOIN customer sunil ON sunil.Cust_name = 'Sunil' AND c.City = sunil.City;
+
+34)-- Count the total number of customer cities.
+SQL> SELECT COUNT(DISTINCT City) AS Total_Customer_Cities
+FROM customer;
+
+35)-- Give citywise name and branchwise deposit.
+SQL> SELECT c.City, b.bname, SUM(d.Amount) AS Branch_Deposit
+FROM customer c
+LEFT JOIN deposit d ON c.Cust_no = d.Cust_no
+LEFT JOIN branch b ON c.City = b.City
+GROUP BY c.City, b.bname;
+
+36)-- List the branches having a sum of deposit more than 1000 and local city MUMBAI.
+SQL> SELECT b.bname
+FROM branch b
+LEFT JOIN deposit d ON b.Bno = d.Bno
+WHERE b.City = 'MUMBAI'
+GROUP BY b.bname
+HAVING SUM(d.Amount) > 1000;
+
+37)-- List the names of customers having deposit in the branches where the average deposit is more than 1000.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN deposit d ON c.Cust_no = d.Cust_no
+JOIN branch b ON d.Bno = b.Bno
+GROUP BY b.bname
+HAVING AVG(d.Amount) > 1000;
+
+38)-- List the name of customers having maximum deposit in the customers living in NAGPUR.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN deposit d ON c.Cust_no = d.Cust_no
+WHERE c.City = 'NAGPUR' AND d.Amount = (SELECT MAX(Amount) FROM deposit WHERE Cust_no = c.Cust_no);
+
+39)- Give the highest deposit of the city where branch of sunil is located.
+SQL> SELECT MAX(d.Amount) AS Highest_Deposit
+FROM deposit d
+JOIN branch b ON d.Bno = b.Bno
+JOIN customer sunil ON sunil.Cust_name = 'Sunil'
+WHERE b.City = sunil.City;
+
+40)
+SQL> SELECT b.bname
+FROM branch b
+LEFT JOIN deposit d ON b.Bno = d.Bno
+GROUP BY b.bname
+HAVING COUNT(d.Cust_no) < 2;
+
+41)-- Give names of branches having the number of depositors more than the number of borrowers.
+SQL> SELECT b.bname
+FROM branch b
+LEFT JOIN deposit d ON b.Bno = d.Bno
+LEFT JOIN borrow bo ON b.Bno = bo.Bno
+GROUP BY b.bname
+HAVING COUNT(DISTINCT d.Cust_no) > COUNT(DISTINCT bo.Cust_no);
+
+42)-- Give the names of customers living in the city where the maximum number of depositors are located.
+SQL> SELECT c.Cust_name
+FROM customer c
+JOIN branch b ON c.City = b.City
+GROUP BY c.Cust_name
+HAVING COUNT(DISTINCT c.Cust_no) = (SELECT MAX(cnt) FROM (SELECT City, COUNT(DISTINCT Cust_no) as cnt FROM branch GROUP BY City));
+
+ 

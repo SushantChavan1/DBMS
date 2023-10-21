@@ -1,0 +1,7 @@
+/*The NOT NULL constraint coloum level*/
+
+create table student(rollno int primary key,name varchar2(10) not null,
+branch varchar2(10)not null,mobile varchar2(10));
+
+/*The NOT NULL constraint table level*/
+
